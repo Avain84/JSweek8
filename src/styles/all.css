@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @import url("https://fonts.googleapis.com/css2?family=Kanit:wght@400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@100..900&display=swap");
 /* http://meyerweb.com/eric/tools/css/reset/ 
@@ -62,6 +61,7 @@ table {
 }
 
 body {
+  font-family: "Noto Sans TC", sans-serif;
   color: #333333;
 }
 
@@ -73,75 +73,18 @@ a {
   text-decoration: none;
 }
 
-.col-sm-1 {
-  width: calc((100% - 72px) / 4 * 1 + 0px);
-}
-
-.col-sm-2 {
-  width: calc((100% - 72px) / 4 * 2 + 24px);
-}
-
-.col-sm-3 {
-  width: calc((100% - 72px) / 4 * 3 + 48px);
-}
-
-.col-sm-4 {
-  width: calc((100% - 72px) / 4 * 4 + 72px);
-}
-
-/*
-    可在元素加上此類別，來限制元素的寬度
-    .col-sm-1
-    .col-sm-2
-    .col-sm-3
-    .col-sm-4
-*/
-@media (min-width: 768px) {
-  .col-lg-1 {
-    width: calc((100% - 264px) / 12 * 1 + 0px);
-  }
-  .col-lg-2 {
-    width: calc((100% - 264px) / 12 * 2 + 24px);
-  }
-  .col-lg-3 {
-    width: calc((100% - 264px) / 12 * 3 + 48px);
-  }
-  .col-lg-4 {
-    width: calc((100% - 264px) / 12 * 4 + 72px);
-  }
-  .col-lg-5 {
-    width: calc((100% - 264px) / 12 * 5 + 96px);
-  }
-  .col-lg-6 {
-    width: calc((100% - 264px) / 12 * 6 + 120px);
-  }
-  .col-lg-7 {
-    width: calc((100% - 264px) / 12 * 7 + 144px);
-  }
-  .col-lg-8 {
-    width: calc((100% - 264px) / 12 * 8 + 168px);
-  }
-  .col-lg-9 {
-    width: calc((100% - 264px) / 12 * 9 + 192px);
-  }
-  .col-lg-10 {
-    width: calc((100% - 264px) / 12 * 10 + 216px);
-  }
-  .col-lg-11 {
-    width: calc((100% - 264px) / 12 * 11 + 240px);
-  }
-  .col-lg-12 {
-    width: calc((100% - 264px) / 12 * 12 + 264px);
-  }
-}
 .container {
-  /* 一個列寬是 58px */
-  /* 列與列之間的間隔寬度為 24px */
-  /* PC版本 */
-  max-width: 960px;
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
+}
+@media (min-width: 768px) {
+  .container {
+    display: flex;
+    gap: 105px;
+    justify-content: center;
+    align-items: center;
+  }
 }
 
 .wrap {
@@ -152,11 +95,25 @@ a {
   padding-left: 12px;
   padding-right: 12px;
 }
+@media (min-width: 768px) {
+  .wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+  }
+}
 
 .title {
+  margin-bottom: 16px;
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+}
+@media (min-width: 768px) {
+  .title {
+    flex-direction: column;
+    align-items: center;
+  }
 }
 .title h1 {
   font-family: "Kanit", "Noto Sans TC", sans-serif;
@@ -179,6 +136,7 @@ a {
 .title img {
   max-width: 100%;
   display: none;
+  margin-top: 15px;
 }
 @media (min-width: 768px) {
   .title img {
@@ -193,10 +151,12 @@ h2 {
   line-height: 1.45;
   margin-bottom: 32px;
 }
-
-form {
-  font-family: "Noto Sans TC", sans-serif;
+@media (min-width: 768px) {
+  h2 {
+    font-size: 24px;
+  }
 }
+
 form div + div {
   margin-top: 16px;
 }

@@ -1,7 +1,11 @@
 .title{
+  margin-bottom: 16px;
   display: flex;
   justify-content: center;
-  margin-bottom: 16px;
+  @include desktop{
+    flex-direction: column;
+    align-items: center;
+  }
   h1{
     font-family: "Kanit","Noto Sans TC", sans-serif;
     position: relative;
@@ -23,6 +27,7 @@
   img{
     max-width: 100%;
     display: none;
+    margin-top: 15px;
     @include desktop{
       display: block;
     }
@@ -35,10 +40,12 @@ h2{
   font-size: 20px;
   line-height: 1.45;
   margin-bottom: 32px;
+  @include desktop{
+    font-size: 24px;
+  }
 }
 
 form{
-  font-family: "Noto Sans TC", sans-serif;
   div + div{
     margin-top: 16px;
   }

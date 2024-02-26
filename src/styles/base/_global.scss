@@ -1,0 +1,35 @@
+body{
+	font-family: "Noto Sans TC", sans-serif;
+	color: $text-black;
+}
+input{
+	display: block;
+}
+a{
+	text-decoration: none;
+}
+.container {
+  margin: 0 auto;
+  padding-left: 20px;
+  padding-right: 20px;
+  @include desktop{
+    display: flex;
+    gap: 105px;
+    justify-content: center;
+    align-items: center;
+  }
+}
+.wrap{
+  background-color: $bg-yellow;
+  width: 100%;
+  height: 100vh;
+  padding-top: 48px;
+  padding-left: 12px;
+  padding-right: 12px;
+  @include desktop{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 0;
+  }
+}
