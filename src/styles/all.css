@@ -1,0 +1,139 @@
+@charset "UTF-8";
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+.col-sm-1 {
+  width: calc((100% - 72px) / 4 * 1 + 0px);
+}
+
+.col-sm-2 {
+  width: calc((100% - 72px) / 4 * 2 + 24px);
+}
+
+.col-sm-3 {
+  width: calc((100% - 72px) / 4 * 3 + 48px);
+}
+
+.col-sm-4 {
+  width: calc((100% - 72px) / 4 * 4 + 72px);
+}
+
+/*
+    可在元素加上此類別，來限制元素的寬度
+    .col-sm-1
+    .col-sm-2
+    .col-sm-3
+    .col-sm-4
+*/
+@media (min-width: 768px) {
+  .col-lg-1 {
+    width: calc((100% - 264px) / 12 * 1 + 0px);
+  }
+  .col-lg-2 {
+    width: calc((100% - 264px) / 12 * 2 + 24px);
+  }
+  .col-lg-3 {
+    width: calc((100% - 264px) / 12 * 3 + 48px);
+  }
+  .col-lg-4 {
+    width: calc((100% - 264px) / 12 * 4 + 72px);
+  }
+  .col-lg-5 {
+    width: calc((100% - 264px) / 12 * 5 + 96px);
+  }
+  .col-lg-6 {
+    width: calc((100% - 264px) / 12 * 6 + 120px);
+  }
+  .col-lg-7 {
+    width: calc((100% - 264px) / 12 * 7 + 144px);
+  }
+  .col-lg-8 {
+    width: calc((100% - 264px) / 12 * 8 + 168px);
+  }
+  .col-lg-9 {
+    width: calc((100% - 264px) / 12 * 9 + 192px);
+  }
+  .col-lg-10 {
+    width: calc((100% - 264px) / 12 * 10 + 216px);
+  }
+  .col-lg-11 {
+    width: calc((100% - 264px) / 12 * 11 + 240px);
+  }
+  .col-lg-12 {
+    width: calc((100% - 264px) / 12 * 12 + 264px);
+  }
+}
+.container {
+  /* 一個列寬是 58px */
+  /* 列與列之間的間隔寬度為 24px */
+  /* PC版本 */
+  max-width: 960px;
+  margin: 0 auto;
+  border: 1px solid #000;
+  background-color: #faa;
+}
+
+.main {
+  background-color: #FFD370;
+  width: 100%;
+  height: 100vh;
+  padding-left: 12px;
+  padding-right: 12px;
+}
