@@ -3,10 +3,41 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>To-Do-List</title>
-  <link rel="stylesheet" href="../src/styles/all.css">
+  <title>ONLINE TODO LIST || 您的待辦</title>
+  <script src="https://kit.fontawesome.com/81060961aa.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="./src/styles/all.css">
 </head>
-<body>
+<body class="inside">
+  <header>
+    <div class="wrapper">
+      <nav>
+        <a href="index.html">
+          <h1>ONLINE TODO LIST</h1>
+        </a>
+        <div class="member">
+          <h4>王小明的待辦</h4>
+          <a href="index.html">登出</a>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <section>
+    <div class="wrapper">
+      <form class="add-list">
+        <input type="text" placeholder="新增待辦事項">
+        <button>
+          <i class="fa-solid fa-plus"></i>
+        </button>
+      </form>
+      <div class="todo">
+        <div class="no-event">
+          <p>目前尚無待辦事項</p>
+          <img src="./src/empty.png" alt="empty">
+        </div>
+      </div>
+    </div>
+  </section>
   
+  </div>
 </body>
 </html>

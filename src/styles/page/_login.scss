@@ -1,3 +1,21 @@
+h1{
+  font-family: "Kanit","Noto Sans TC", sans-serif;
+  position: relative;
+  font-weight: 700;
+  font-size: 32px;
+  line-height: 1.5625;
+  margin-left: 40px;
+  &::before{
+    content: '';
+    width: 42px;
+    height: 42px;
+    background: url("./../check.png") no-repeat;
+    background-size: contain;
+    position: absolute;
+    top: 5px;
+    left: -42px;
+  }
+}
 .title{
   margin-bottom: 16px;
   display: flex;
@@ -5,24 +23,6 @@
   @include desktop{
     flex-direction: column;
     align-items: center;
-  }
-  h1{
-    font-family: "Kanit","Noto Sans TC", sans-serif;
-    position: relative;
-    font-weight: 700;
-    font-size: 32px;
-    line-height: 1.5625;
-    margin-left: 40px;
-    &::before{
-      content: '';
-      width: 42px;
-      height: 42px;
-      background: url("./../check.png") no-repeat;
-      background-size: contain;
-      position: absolute;
-      top: 5px;
-      left: -42px;
-    }
   }
   img{
     max-width: 100%;
