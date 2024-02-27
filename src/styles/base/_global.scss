@@ -10,6 +10,11 @@ a{
 	text-decoration: none;
   color: $text-black;
 }
+button{
+  cursor: pointer;
+  border: 0;
+  background-color: transparent;
+}
 .container {
   max-width: 960px;
   margin: 0 auto;

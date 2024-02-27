@@ -21,7 +21,7 @@ nav{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  h1{
+  .home{
     font-size: 24px;
     margin-left: 35px;
     &::before{
@@ -35,7 +35,7 @@ nav{
 .member{
   display: flex;
   gap: 24px;
-  h4{
+  .user{
     display: none;
     font-size: 16px;
     font-weight: 700;
@@ -51,7 +51,7 @@ nav{
     line-height: 1.45;
   }
 }
-section{
+.mylist{
   .wrapper{
     display: flex;
     flex-direction: column;
@@ -60,14 +60,14 @@ section{
 }
 .add-list{
   margin-bottom: 16px;
-  min-width: 100%;
+  width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   background-color: #fff;
   border-radius: 10px;
   @include desktop{
-    min-width: 500px;
+    width: 500px;
   }
   input{
     margin-top: 0;
@@ -96,14 +96,90 @@ section{
   }
 }
 .no-event{
+  margin-top:80px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
-  p{
-    margin-top:80px;
-    @include desktop{
-      margin-top: 44px;
+  @include desktop{
+    margin-top: 44px;
+  }
+}
+.todo{
+  width: 100%;
+  margin: 0 auto;
+  @include desktop{
+    max-width: 500px;
+  }
+}
+.event{
+  background-color: #fff;
+  border-radius: 10px;
+}
+.list-menu{
+  display: flex;
+  margin-bottom: 7px;
+  li{
+    width: 33.3%;
+    border-bottom: 2px solid #EFEFEF;
+  }
+  button{
+    color: $text-list;
+    width: 100%;
+    font-weight: 700;
+    font-size: 14px;
+    line-height: 1.45;
+    text-align: center;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+  .list-menu-active{
+    border-color: $text-black;
+    button{
+      color: $text-black;
     }
+  }
+}
+.todolist{
+  padding-left: 16px;
+  padding-right: 16px;
+  li{
+    border-bottom: 1px solid #E5E5E5;
+    padding-bottom: 16px;
+    padding-top: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  .state{
+    width: 20px;
+    .undone{
+      font-size: 20px;
+      color: $text-list;
+    }
+    .done{
+      display: none;
+      font-size: 20px;
+      color: $bg-yellow;
+    }
+  }
+  .event{
+    font-size: 14px;
+    line-height: 1.45;
+  }
+  .list-del{
+    margin-left: auto;
+    font-size: 20px;
+  }
+}
+.about-list{
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-left: 16px;
+  padding-right: 16px;
+  display: flex;
+  justify-content: space-between;
+  .clear-done{
+    color: $text-list;
   }
 }
