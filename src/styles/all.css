@@ -434,6 +434,12 @@ nav .home::before {
   display: flex;
   justify-content: space-between;
 }
+.about-list .undone {
+  font-size: 14px;
+  line-height: 1.45;
+}
 .about-list .clear-done {
+  font-size: 14px;
+  line-height: 1.45;
   color: #9F9A91;
 }

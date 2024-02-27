@@ -179,7 +179,13 @@ nav{
   padding-right: 16px;
   display: flex;
   justify-content: space-between;
+  .undone{
+    font-size: 14px;
+    line-height: 1.45;
+  }
   .clear-done{
+    font-size: 14px;
+    line-height: 1.45;
     color: $text-list;
   }
 }
