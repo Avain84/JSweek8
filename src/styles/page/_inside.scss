@@ -121,9 +121,9 @@ nav{
   margin-bottom: 7px;
   li{
     width: 33.3%;
-    border-bottom: 2px solid #EFEFEF;
   }
   button{
+    border-bottom: 2px solid #EFEFEF;
     color: $text-list;
     width: 100%;
     font-weight: 700;
@@ -135,9 +135,7 @@ nav{
   }
   .list-menu-active{
     border-color: $text-black;
-    button{
-      color: $text-black;
-    }
+    color: $text-black;
   }
 }
 .todolist{
@@ -183,7 +181,7 @@ nav{
   padding-right: 16px;
   display: flex;
   justify-content: space-between;
-  .undone{
+  .undone-count{
     font-size: 14px;
     line-height: 1.45;
   }
@@ -192,4 +190,8 @@ nav{
     line-height: 1.45;
     color: $text-list;
   }
+}
+.add,
+.event{
+  box-shadow: 0 0 15px rgba($color: #000000, $alpha: 0.15);
 }

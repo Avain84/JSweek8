@@ -40,3 +40,10 @@ button{
     padding-top: 0;
   }
 }
+// 使用在alert 的字被隱藏但保留該空間
+.vbhidden{
+  visibility: hidden;
+}
+.dphidden{
+  display: none !important;
+}

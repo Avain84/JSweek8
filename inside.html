@@ -23,9 +23,9 @@
   </header>
   <section class="mylist">
     <div class="wrapper">
-      <form class="add-list">
-        <input type="text" placeholder="新增待辦事項">
-        <button>
+      <form class="add">
+        <input type="text" class="add-list" placeholder="新增待辦事項">
+        <button type="submit" class="add-btn">
           <i class="fa-solid fa-plus"></i>
         </button>
       </form>
@@ -34,10 +34,24 @@
           <p>目前尚無待辦事項</p>
           <img src="./src/empty.png" alt="empty">
         </div>
+        <div class="event">
+          <ul class="list-menu">
+            <li><button class="list-menu-active" name="全部">全部</button></li>
+            <li><button name="待完成">待完成</button></li>
+            <li><button name="已完成">已完成</button></li>
+          </ul>
+          <ul class="todolist">
+          </ul>
+          <div class="about-list">
+            <div class="undone-count"></div>
+            <button class="clear-done">清除已完成項目</button>
+          </div>
+        </div>
       </div>
     </div>
   </section>
   
   </div>
+  <script src="./src/scripts/inside.js"></script>
 </body>
 </html>
