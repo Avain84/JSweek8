@@ -58,7 +58,7 @@ nav{
     align-items: center;
   }
 }
-.add-list{
+.add{
   margin-bottom: 16px;
   width: 100%;
   display: flex;
@@ -69,12 +69,12 @@ nav{
   @include desktop{
     width: 500px;
   }
-  input{
+  .add-list{
     margin-top: 0;
     margin-bottom: 0;
     width: calc(100% - 40px);
   }
-  button{
+  .add-btn{
     padding-top: 4px;
     margin-right: 4px;
     margin-top: 4px;
@@ -158,14 +158,18 @@ nav{
       color: $text-list;
     }
     .done{
-      display: none;
       font-size: 20px;
       color: $bg-yellow;
     }
   }
-  .event{
+  .undone-event{
     font-size: 14px;
     line-height: 1.45;
+  }
+  .done-event{
+    font-size: 14px;
+    line-height: 1.45;
+    text-decoration: line-through;
   }
   .list-del{
     margin-left: auto;
