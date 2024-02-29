@@ -97,7 +97,7 @@ logOut.addEventListener("click",e => {
   .then(response => {
     alert(response.data.message);
     window.localStorage.clear();
-    window.location.href = '/index.html';
+    window.location.href = '../index.html';
   })
   .catch(error => {
     console.log(error);
