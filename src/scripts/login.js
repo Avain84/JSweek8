@@ -1,4 +1,4 @@
-let urlDomain = 'https://todoo.5xcamp.us';
+const urlDomain = 'https://todoo.5xcamp.us';
 
 // DOM
 const loginForm = document.querySelector('.login-form');
@@ -39,6 +39,8 @@ loginForm.addEventListener("submit", e => {
     
     axios.post(urlDomain + '/users/sign_in',dataForm)
     .then(response => {
+      window.localStorage.setItem('token', response.headers.authorization);
+      window.localStorage.setItem('nickname', response.data.nickname);
       loginForm.submit();
     })
     .catch(error => {
@@ -54,4 +56,3 @@ loginForm.addEventListener("submit", e => {
     })
   }
 });
-

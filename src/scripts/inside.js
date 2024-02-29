@@ -3,26 +3,28 @@ let urlDomain = 'https://todoo.5xcamp.us';
 // 變數區
 let data = {
   "todos" : [
-    {
-      "id": "38e700e69b48876505df573bc79e3495",
-      "content": "test22",
-      "completed_at": null
-    },
-    {
-      "id": "8b3a9e028f62bf29ecb47f9d11f41770",
-      "content": "test11",
-      "completed_at": 1
-    },
-    {
-      "id": "11d5ce31fee731db103b08194a291623",
-      "content": "test",
-      "completed_at": null
-    }
+    // {
+    //   "id": "38e700e69b48876505df573bc79e3495",
+    //   "content": "test22",
+    //   "completed_at": null
+    // },
+    // {
+    //   "id": "8b3a9e028f62bf29ecb47f9d11f41770",
+    //   "content": "test11",
+    //   "completed_at": 1
+    // },
+    // {
+    //   "id": "11d5ce31fee731db103b08194a291623",
+    //   "content": "test",
+    //   "completed_at": null
+    // }
   ]
 };
 
 
 // DOM 元素
+// 登出
+const logOut = document.querySelector(".log-out");
 // 新增待辦事項元素
 const add = document.querySelector(".add");
 const addList = document.querySelector(".add-list");
@@ -82,6 +84,26 @@ const showList = dataList => {
 
 // 初始化畫面
 init(data);
+
+// 登出API
+logOut.addEventListener("click",e => {
+  e.preventDefault();
+  const config = {
+    headers : {
+      authorization: window.localStorage.getItem('token'),
+    }
+  };
+  axios.delete(urlDomain + '/users/sign_out',config)
+  .then(response => {
+    alert(response.data.message);
+    window.localStorage.clear();
+    window.location.href = '/index.html';
+  })
+  .catch(error => {
+    console.log(error);
+  })
+
+});
 
 
 addBtn.addEventListener("click",e => {
