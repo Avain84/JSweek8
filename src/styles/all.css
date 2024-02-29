@@ -79,6 +79,7 @@ button {
   cursor: pointer;
   border: 0;
   background-color: transparent;
+  font-family: "Noto Sans TC", sans-serif;
 }
 
 .container {
@@ -98,13 +99,15 @@ button {
 
 .wrap {
   width: 100%;
-  height: 100vh;
   padding-top: 48px;
+  padding-bottom: 48px;
   padding-left: 12px;
   padding-right: 12px;
 }
 @media (min-width: 768px) {
   .wrap {
+    height: 100vh;
+    padding-bottom: 0;
     display: flex;
     justify-content: center;
     align-items: center;
