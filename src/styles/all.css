@@ -212,7 +212,7 @@ form .alert {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 27px;
+  margin-top: 10px;
 }
 
 .btn-lg {

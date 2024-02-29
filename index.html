@@ -17,7 +17,7 @@
       </div>
       <main>
         <h2 class="home-title">最實用的線上代辦事項服務</h2>
-        <form>
+        <form class="login-form" action="./inside.html">
           <div class="mail">
             <label for="email">Email</label>
             <input type="email" id="email" placeholder="請輸入Email">
@@ -28,13 +28,16 @@
             <input type="password" id="password" placeholder="請輸入密碼">
             <div class="alert alert-password">此欄位不可為空</div>  
           </div>
+          <div class="home-btn">
+            <button type="submit" class="btn-lg">登入</button>
+            <a href="./sign.html" class="btn-sm">註冊帳號</a>
+          </div>
         </form>
-        <div class="home-btn">
-          <a href="./inside.html" class="btn-lg">登入</a>
-          <a href="./sign.html" class="btn-sm">註冊帳號</a>
-        </div>
       </main>
     </div>
   </div>
+
+  <script src="https://unpkg.com/axios@1.6.7/dist/axios.min.js"></script>
+  <script src="./src/scripts/login.js"></script>
 </body>
 </html>

@@ -1,3 +1,5 @@
+let urlDomain = 'https://todoo.5xcamp.us';
+
 // 變數區
 let data = {
   "todos" : [
