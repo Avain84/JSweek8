@@ -9,9 +9,11 @@ input{
 a{
 	text-decoration: none;
   color: $text-black;
+  outline: 0;
 }
 button{
   cursor: pointer;
+  outline: 0;
   border: 0;
   background-color: transparent;
   font-family: "Noto Sans TC", sans-serif;

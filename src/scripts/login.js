@@ -1,4 +1,4 @@
-const urlDomain = 'https://todoo.5xcamp.us';
+const baseURL = 'https://todoo.5xcamp.us';
 
 // DOM
 const loginForm = document.querySelector('.login-form');
@@ -37,10 +37,11 @@ loginForm.addEventListener("submit", e => {
       }
     };
     
-    axios.post(urlDomain + '/users/sign_in',dataForm)
+    axios.post(baseURL + '/users/sign_in',dataForm)
     .then(response => {
       window.localStorage.setItem('token', response.headers.authorization);
       window.localStorage.setItem('nickname', response.data.nickname);
+      window.localStorage.setItem('loginPage', location.href);
       loginForm.submit();
     })
     .catch(error => {
@@ -52,7 +53,8 @@ loginForm.addEventListener("submit", e => {
       }else{
         alert(`${error.response.status} -- 其他錯誤`);
       }
+      window.localStorage.clear();
       alertText.forEach(item => item.classList.add('vbhidden'));
-    })
+    });
   }
 });

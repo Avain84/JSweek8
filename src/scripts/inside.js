@@ -1,4 +1,4 @@
-let urlDomain = 'https://todoo.5xcamp.us';
+let baseURL = 'https://todoo.5xcamp.us';
 
 // 變數區
 let data = {
@@ -23,7 +23,9 @@ let data = {
 
 
 // DOM 元素
-// 登出
+// 導覽列
+const home = document.querySelector(".home");
+const user = document.querySelector(".user");
 const logOut = document.querySelector(".log-out");
 // 新增待辦事項元素
 const add = document.querySelector(".add");
@@ -39,6 +41,7 @@ const toDoList = document.querySelector(".todolist");
 const undoneNum = document.querySelector(".undone-count")
 
 const init = data => {
+  user.textContent = `${window.localStorage.getItem('nickname')}的待辦`;
   // 判斷是否待辦事件
   if (data.todos.length){
     // 有待辦事件-移除無事件圖樣，新增有事件列表
@@ -81,26 +84,48 @@ const showList = dataList => {
   undoneNum.textContent = `${undoneCount} 個待完成項目`;
 }
 
+// Test API
+(() => {
+  let config = {
+    headers: { authorization: window.localStorage.getItem('token')},
+  };
+  axios.get(baseURL + '/check',config)
+  .then(response => {
+    alert(`${window.localStorage.getItem('nickname')}您好！`);
+  })
+  .catch(error => {
+    alert(error.response.data.message);
+    window.location.href = window.localStorage.getItem('loginPage');
+    window.localStorage.clear();
+  })
+})();
 
 // 初始化畫面
 init(data);
 
+// 點擊 logo 清除 localStorage
+home.addEventListener("click",e => {
+  window.localStorage.clear();
+});
+
 // 登出API
 logOut.addEventListener("click",e => {
   e.preventDefault();
+
   const config = {
     headers : {
       authorization: window.localStorage.getItem('token'),
     }
   };
-  axios.delete(urlDomain + '/users/sign_out',config)
+  
+  axios.delete(baseURL + '/users/sign_out',config)
   .then(response => {
     alert(response.data.message);
+    window.location.href = window.localStorage.getItem('loginPage');
     window.localStorage.clear();
-    window.location.href = '../index.html';
   })
   .catch(error => {
-    console.log(error);
+    alert("登出失敗，請重新嘗試！");
   })
 
 });

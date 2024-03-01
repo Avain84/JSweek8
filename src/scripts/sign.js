@@ -1,4 +1,4 @@
-let urlDomain = 'https://todoo.5xcamp.us';
+let baseURL = 'https://todoo.5xcamp.us';
 
 // DOM
 const signUpForm = document.querySelector('.sign-up-form');
@@ -60,7 +60,7 @@ signUpForm.addEventListener('submit', e => {
       }
     };
     // 註冊
-    axios.post(urlDomain + '/users',dataForm)
+    axios.post(baseURL + '/users',dataForm)
     .then(response => {
       alert(`-----${response.data.message}-----
       ${response.data.nickname}您好！
