@@ -1,17 +1,23 @@
-body{
+body {
   font-family: "Noto Sans TC", sans-serif;
-	color: $text-black;
+  color: $text-black;
   background-color: $bg-yellow;
 }
-input{
-	display: block;
+input {
+  display: block;
+  &:focus{
+    background-color: #fff;
+  }
+  &:active{
+    background-color: #fff;
+  }
 }
-a{
-	text-decoration: none;
+a {
+  text-decoration: none;
   color: $text-black;
   outline: 0;
 }
-button{
+button {
   cursor: pointer;
   outline: 0;
   border: 0;
@@ -23,20 +29,20 @@ button{
   margin: 0 auto;
   padding-left: 20px;
   padding-right: 20px;
-  @include desktop{
+  @include desktop {
     display: flex;
     gap: 105px;
     justify-content: center;
     align-items: center;
   }
 }
-.wrap{
+.wrap {
   width: 100%;
   padding-top: 48px;
   padding-bottom: 48px;
   padding-left: 12px;
   padding-right: 12px;
-  @include desktop{
+  @include desktop {
     height: 100vh;
     padding-bottom: 0;
     display: flex;
@@ -46,9 +52,10 @@ button{
   }
 }
 // 使用在alert 的字被隱藏但保留該空間
-.vbhidden{
+.vbhidden {
   visibility: hidden;
 }
-.dphidden{
+// 使用在內頁區塊是否有事件的呈現方式
+.dphidden {
   display: none !important;
 }

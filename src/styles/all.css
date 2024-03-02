@@ -69,6 +69,12 @@ body {
 input {
   display: block;
 }
+input:focus {
+  background-color: #fff;
+}
+input:active {
+  background-color: #fff;
+}
 
 a {
   text-decoration: none;

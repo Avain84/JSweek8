@@ -29,7 +29,7 @@ const user = document.querySelector(".user");
 const logOut = document.querySelector(".log-out");
 // 新增待辦事項元素
 const add = document.querySelector(".add");
-const addList = document.querySelector(".add-list");
+// const addList = document.querySelector(".add-list");
 const addBtn = document.querySelector(".add-btn");
 // todolist 元素
 const noEvent = document.querySelector(".no-event");
@@ -40,23 +40,40 @@ const toDoList = document.querySelector(".todolist");
 // const listCheckbox = document.querySelectorAll(".state button");
 const undoneNum = document.querySelector(".undone-count")
 
-const init = data => {
+// 使用者的token
+const config = {
+  headers: { authorization: window.localStorage.getItem('token')},
+};
+
+// 取得 TODO 列表
+const getList = () => {
   user.textContent = `${window.localStorage.getItem('nickname')}的待辦`;
-  // 判斷是否待辦事件
-  if (data.todos.length){
-    // 有待辦事件-移除無事件圖樣，新增有事件列表
-    noEvent.classList.add('dphidden');
-    haveEvent.classList.remove('dphidden');
-    showList(data.todos);
-  }else{
-    // 無待辦事件-新增無事件圖樣，移除有事件列表
-    noEvent.classList.remove('dphidden');
-    haveEvent.classList.add('dphidden');
-  }
+
+  axios.get(baseURL + "/todos",config)
+  .then(response => {
+    const todo = response.data.todos;
+
+    // 判斷是否待辦事件
+    if (todo.length){
+      // 有待辦事件-移除無事件圖樣，新增有事件列表
+      noEvent.classList.add('dphidden');
+      haveEvent.classList.remove('dphidden');
+      showList(todo);
+    }else{
+      // 無待辦事件-新增無事件圖樣，移除有事件列表
+      noEvent.classList.remove('dphidden');
+      haveEvent.classList.add('dphidden');
+    }
+  })
+  .catch(error => {
+    alert(error.response.data.message);
+    window.location.href = window.localStorage.getItem('loginPage');
+    window.localStorage.clear();
+  })
 }
 
+// 處理資料渲染
 const showList = dataList => {
-  // 處理資料渲染
   let listStr = '';
   let undoneCount = 0;
   dataList.forEach(item => {
@@ -84,14 +101,13 @@ const showList = dataList => {
   undoneNum.textContent = `${undoneCount} 個待完成項目`;
 }
 
-// Test API
+// Test API，token未過期才初始化畫面，若已過期則回到首頁
 (() => {
-  let config = {
-    headers: { authorization: window.localStorage.getItem('token')},
-  };
   axios.get(baseURL + '/check',config)
   .then(response => {
     alert(`${window.localStorage.getItem('nickname')}您好！`);
+    // 初始化畫面
+    getList();
   })
   .catch(error => {
     alert(error.response.data.message);
@@ -100,23 +116,15 @@ const showList = dataList => {
   })
 })();
 
-// 初始化畫面
-init(data);
-
 // 點擊 logo 清除 localStorage
 home.addEventListener("click",e => {
   window.localStorage.clear();
+  // 首頁應該要有判斷是否還有token
 });
 
 // 登出API
 logOut.addEventListener("click",e => {
   e.preventDefault();
-
-  const config = {
-    headers : {
-      authorization: window.localStorage.getItem('token'),
-    }
-  };
   
   axios.delete(baseURL + '/users/sign_out',config)
   .then(response => {
@@ -131,44 +139,80 @@ logOut.addEventListener("click",e => {
 });
 
 
-addBtn.addEventListener("click",e => {
-  // 監聽新增待辦事項
-  e.preventDefault();
-  if(!addList.value){
-    alert("請輸入待辦事項");
-    return;
-  }
-  // 接API之後可能要用POST吧?
-  let newTodo = {
-    "id": "",
-    "content": addList.value,
-    "completed_at": null
-  }
-  data.todos.push(newTodo);
-  add.reset();
-  init(data);
-});
+// // 新增TODO API
+// add.addEventListener("submit",e => {
+//   e.preventDefault();
+//   const newData = {
+//     "todo": {
+//       "content": ''
+//     }
+//   };
 
-listMenu.addEventListener("click",e =>{
-  // 監聽清單選項列
-  e.preventDefault();
-  listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
-  e.target.classList.add('list-menu-active');
-  if(e.target.name === "全部"){
-    init(data);
-  }else{
-    const filterData = data.todos.filter(item => {
-      let itemState = '';
-      if(!item.completed_at){
-        itemState = '待完成';
-      }else{
-        itemState = '已完成';
-      }
-      return e.target.name === itemState;
-    });
-    showList(filterData);
-  }
-})
+//   if(!addList.value){
+//     alert("請輸入待辦事項");
+//     return;
+//   }else{
+//     newData.todo.content = addList.value;
+//     console.log(newData);
+//   }
+//   axios.post(baseURL + '/todos',newData,config)
+//   .then(response => {
+//     console.log(response);
+//   })
+//   .catch(error => {
+//     console.log(error);
+//   });
+
+//   // // 接API之後可能要用POST吧?
+//   // let newTodo = {
+//   //   "id": "",
+//   //   "content": addList.value,
+//   //   "completed_at": null
+//   // }
+//   // data.todos.push(newTodo);
+//   // add.reset();
+//   // getList(data);
+
+// });
+
+// addBtn.addEventListener("click",e => {
+//   // 監聽新增待辦事項
+//   e.preventDefault();
+//   if(!addList.value){
+//     alert("請輸入待辦事項");
+//     return;
+//   }
+//   // 接API之後可能要用POST吧?
+//   let newTodo = {
+//     "id": "",
+//     "content": addList.value,
+//     "completed_at": null
+//   }
+//   data.todos.push(newTodo);
+//   add.reset();
+//   getList(data);
+// });
+
+// listMenu.addEventListener("click",e =>{
+//   // 監聽清單選項列
+//   e.preventDefault();
+//   listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
+//   e.target.classList.add('list-menu-active');
+//   if(e.target.name === "全部"){
+//     getList();
+//   }else{
+//     const filterData = data.todos.filter(item => {
+//       let itemState = '';
+//       if(!item.completed_at){
+//         itemState = '待完成';
+//       }else{
+//         itemState = '已完成';
+//       }
+//       return e.target.name === itemState;
+//     });
+//     showList(filterData);
+//   }
+// });
 // 未作內容: 點擊左側狀態改變、刪除
 // document.querySelectorAll(".state button").forEach(item => {
 //   item.addEventListener("click",e => {
