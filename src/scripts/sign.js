@@ -20,20 +20,24 @@ const signUpFormCheck = (form) => {
   }else if(!nicknameTest.test(form.nickname.value)){
     alertEmail.classList.add('vbhidden');
     alert("請輸入正確的暱稱\n規則：中文或英文");
+    nickname.value = "";
     alertNickname.classList.remove('vbhidden');
     return;
   }else if(!passwordTest.test(form.password.value)){
     alertNickname.classList.add('vbhidden');
     alert("請輸入正確的密碼格式\n密碼：英文或數字 6~12碼");
+    password.value = "";
     alertPassword.classList.remove('vbhidden');
     return;
   }else if(!passwordTest.test(form.passwordAgain.value)){
     alertPassword.classList.add('vbhidden');
     alert("請輸入正確的密碼格式\n密碼：英文或數字 6~12碼");
+    passwordAgain.value = "";
     alertPasswordAgain.classList.remove('vbhidden');
     return;
   }else if(form.passwordAgain.value !== form.password.value){
     alert("輸入錯誤，請填入正確的密碼");
+    passwordAgain.value = "";
     alertPasswordAgain.classList.remove('vbhidden');
     return;
   }else{

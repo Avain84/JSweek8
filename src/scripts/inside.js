@@ -3,6 +3,7 @@ let baseURL = 'https://todoo.5xcamp.us';
 // 變數區
 let data = {};
 let undoneCount = 0;
+let clickCount = 0;
 
 // DOM 元素
 // 導覽列
@@ -11,7 +12,6 @@ const user = document.querySelector(".user");
 const logOut = document.querySelector(".log-out");
 // 新增待辦事項元素
 const add = document.querySelector(".add");
-// const addList = document.querySelector(".add-list");
 const addBtn = document.querySelector(".add-btn");
 // todolist 元素
 const noEvent = document.querySelector(".no-event");
@@ -62,22 +62,21 @@ const getList = () => {
 const showList = dataList => {
   let listStr = '';
   undoneCount = 0;
-  // let undoneCount = 0;
   dataList.forEach(item => {
     if(!item.completed_at){
       // 未完成
       undoneCount++;
       listStr += `<li class="listitem" id="${item.id}">
-        <div class="state">
-          <button class="undone"><i class="fa-regular fa-square"></i></button>
+        <div class="state state-btn">
+          <button class="undone state-btn"><i class="state-btn fa-regular fa-square"></i></button>
         </div>
         <p class="undone-event">${item.content}</p>
         <button class="list-del"><i class="list-del fa-solid fa-xmark"></i></button>
       </li>`;
     }else{
       listStr += `<li class="listitem" id="${item.id}">
-        <div class="state">
-          <button class="done"><i class="fa-solid fa-check"></i></button>
+        <div class="state state-btn">
+          <button class="done state-btn"><i class="state-btn fa-solid fa-check"></i></button>
         </div>
         <p class="done-event">${item.content}</p>
         <button class="list-del"><i class="list-del fa-solid fa-xmark"></i></button>
@@ -86,7 +85,6 @@ const showList = dataList => {
   });
   toDoList.innerHTML = listStr;
   deleteBtn = document.querySelectorAll('.list-del');
-  // undoneNum.textContent = `${undoneCount} 個待完成項目`;
 }
 
 // Test API，token未過期才初始化畫面，若已過期則回到首頁
@@ -151,8 +149,8 @@ add.addEventListener("submit",e => {
   }
 });
 
+// 監聽清單選項列
 listMenu.addEventListener("click",e =>{
-  // 監聽清單選項列
   e.preventDefault();
 
   listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
@@ -170,34 +168,50 @@ listMenu.addEventListener("click",e =>{
       return e.target.name === itemState;
     });
     showList(filterData);
-    undoneNum.textContent = `${undoneCount} 個待完成項目`;
   }
 });
 
-// 刪除指定資料
+// 指定資料處理
 toDoList.addEventListener("click",e => {
   const listItem = e.target.closest('.listitem'); // 找到最近的父層<li class=".listitem">元素
-  if(!e.target.classList.contains('list-del')){
-    return;
-  }
-  if (listItem) {
-    const itemId = listItem.getAttribute('id'); // 取得<li>的屬性值
-
-    axios.delete(`${baseURL}/todos/${itemId}`,config)
-    .then(response => {
-      alert(response.data.message);
-      getList();
-    })
-    .catch(error => {
-      console.log(error);
-    })
+  const itemId = listItem.getAttribute('id'); // 取得<li>的屬性值
+  if(e.target.classList.contains('list-del')){
+    clickCount = 0;
+    // 刪除指定資料
+    if (listItem) {
+      axios.delete(`${baseURL}/todos/${itemId}`,config)
+      .then(response => {
+        alert(`${response.data.message}成功`);
+        getList();
+      })
+      .catch(error => {
+        alert(`${error.response.data.message}刪除`);
+      })
+    }
+  }else if(e.target.classList.contains('state-btn')){
+    clickCount = 0;
+    // 切換指定資料狀態
+    if (listItem) {
+      axios.patch(`${baseURL}/todos/${itemId}/toggle`,itemId,config)
+      .then(response => {
+        if(response.data.completed_at){
+          alert(`恭喜您完成<${response.data.content}>`);
+        }else{
+          alert(`切換<${response.data.content}>至待完成清單`);
+        }
+        getList();
+        listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
+        all.classList.add('list-menu-active');
+      })
+      .catch(error => {
+        alert(`${error.response.data.message}成功`);
+      })
+    }
   }else{
-    return;
-  }
+    clickCount++;
+    if(clickCount > 5){
+      alert(`不要亂點RRRRR`);
+      clickCount = 0;
+    }
+  } 
 });
-// 未作內容: 點擊左側狀態改變、刪除
-// document.querySelectorAll(".state button").forEach(item => {
-//   item.addEventListener("click",e => {
-//     console.log(item);
-//   });
-// });
