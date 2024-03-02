@@ -20,8 +20,9 @@ const listMenu = document.querySelector(".list-menu");
 const all = document.querySelector(".all");
 const listMenuButton = document.querySelectorAll(".list-menu button");
 const toDoList = document.querySelector(".todolist");
-// const listCheckbox = document.querySelectorAll(".state button");
-const undoneNum = document.querySelector(".undone-count")
+const undoneNum = document.querySelector(".undone-count");
+
+let deleteBtn; // 刪除按鍵的DOM，在渲染後才抓取DOM元素
 
 // 使用者的token
 const config = {
@@ -66,24 +67,25 @@ const showList = dataList => {
     if(!item.completed_at){
       // 未完成
       undoneCount++;
-      listStr += `<li>
+      listStr += `<li class="listitem" id="${item.id}">
         <div class="state">
           <button class="undone"><i class="fa-regular fa-square"></i></button>
         </div>
         <p class="undone-event">${item.content}</p>
-        <button class="list-del"><i class="fa-solid fa-xmark"></i></button>
+        <button class="list-del"><i class="list-del fa-solid fa-xmark"></i></button>
       </li>`;
     }else{
-      listStr += `<li>
+      listStr += `<li class="listitem" id="${item.id}">
         <div class="state">
           <button class="done"><i class="fa-solid fa-check"></i></button>
         </div>
         <p class="done-event">${item.content}</p>
-        <button class="list-del"><i class="fa-solid fa-xmark"></i></button>
+        <button class="list-del"><i class="list-del fa-solid fa-xmark"></i></button>
       </li>`;
     }
   });
   toDoList.innerHTML = listStr;
+  deleteBtn = document.querySelectorAll('.list-del');
   // undoneNum.textContent = `${undoneCount} 個待完成項目`;
 }
 
@@ -169,6 +171,28 @@ listMenu.addEventListener("click",e =>{
     });
     showList(filterData);
     undoneNum.textContent = `${undoneCount} 個待完成項目`;
+  }
+});
+
+// 刪除指定資料
+toDoList.addEventListener("click",e => {
+  const listItem = e.target.closest('.listitem'); // 找到最近的父層<li class=".listitem">元素
+  if(!e.target.classList.contains('list-del')){
+    return;
+  }
+  if (listItem) {
+    const itemId = listItem.getAttribute('id'); // 取得<li>的屬性值
+
+    axios.delete(`${baseURL}/todos/${itemId}`,config)
+    .then(response => {
+      alert(response.data.message);
+      getList();
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }else{
+    return;
   }
 });
 // 未作內容: 點擊左側狀態改變、刪除

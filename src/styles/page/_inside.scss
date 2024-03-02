@@ -170,6 +170,7 @@ nav{
     text-decoration: line-through;
   }
   .list-del{
+    display: none;
     margin-left: auto;
     font-size: 20px;
   }
@@ -194,4 +195,9 @@ nav{
 .add,
 .event{
   box-shadow: 0 0 15px rgba($color: #000000, $alpha: 0.15);
+}
+.listitem:hover{
+  .list-del{
+    display: block;
+  }
 }
