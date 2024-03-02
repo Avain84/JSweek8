@@ -47,6 +47,7 @@ const config = {
 
 // 取得 TODO 列表
 const getList = () => {
+  user.classList.remove('dphidden');
   user.textContent = `${window.localStorage.getItem('nickname')}的待辦`;
 
   axios.get(baseURL + "/todos",config)
@@ -138,60 +139,27 @@ logOut.addEventListener("click",e => {
 
 });
 
-
-// // 新增TODO API
-// add.addEventListener("submit",e => {
-//   e.preventDefault();
-//   const newData = {
-//     "todo": {
-//       "content": ''
-//     }
-//   };
-
-//   if(!addList.value){
-//     alert("請輸入待辦事項");
-//     return;
-//   }else{
-//     newData.todo.content = addList.value;
-//     console.log(newData);
-//   }
-//   axios.post(baseURL + '/todos',newData,config)
-//   .then(response => {
-//     console.log(response);
-//   })
-//   .catch(error => {
-//     console.log(error);
-//   });
-
-//   // // 接API之後可能要用POST吧?
-//   // let newTodo = {
-//   //   "id": "",
-//   //   "content": addList.value,
-//   //   "completed_at": null
-//   // }
-//   // data.todos.push(newTodo);
-//   // add.reset();
-//   // getList(data);
-
-// });
-
-// addBtn.addEventListener("click",e => {
-//   // 監聽新增待辦事項
-//   e.preventDefault();
-//   if(!addList.value){
-//     alert("請輸入待辦事項");
-//     return;
-//   }
-//   // 接API之後可能要用POST吧?
-//   let newTodo = {
-//     "id": "",
-//     "content": addList.value,
-//     "completed_at": null
-//   }
-//   data.todos.push(newTodo);
-//   add.reset();
-//   getList(data);
-// });
+// 新增TODO API
+add.addEventListener("submit",e => {
+  e.preventDefault();
+  const newData = {
+    "todo": {
+      "content": addList.value
+    }
+  };
+  if(!addList.value){
+    alert("請輸入待辦事項");
+    return;
+  }else{    
+    axios.post(baseURL + '/todos',newData,config)
+    .then(response => {
+      getList();
+    })
+    .catch(error => {
+      alert("連線異常");
+    });
+  }
+});
 
 // listMenu.addEventListener("click",e =>{
 //   // 監聽清單選項列
