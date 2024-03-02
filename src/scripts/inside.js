@@ -1,26 +1,8 @@
 let baseURL = 'https://todoo.5xcamp.us';
 
 // 變數區
-let data = {
-  "todos" : [
-    // {
-    //   "id": "38e700e69b48876505df573bc79e3495",
-    //   "content": "test22",
-    //   "completed_at": null
-    // },
-    // {
-    //   "id": "8b3a9e028f62bf29ecb47f9d11f41770",
-    //   "content": "test11",
-    //   "completed_at": 1
-    // },
-    // {
-    //   "id": "11d5ce31fee731db103b08194a291623",
-    //   "content": "test",
-    //   "completed_at": null
-    // }
-  ]
-};
-
+let data = {};
+let undoneCount = 0;
 
 // DOM 元素
 // 導覽列
@@ -35,6 +17,7 @@ const addBtn = document.querySelector(".add-btn");
 const noEvent = document.querySelector(".no-event");
 const haveEvent = document.querySelector(".event");
 const listMenu = document.querySelector(".list-menu");
+const all = document.querySelector(".all");
 const listMenuButton = document.querySelectorAll(".list-menu button");
 const toDoList = document.querySelector(".todolist");
 // const listCheckbox = document.querySelectorAll(".state button");
@@ -53,13 +36,14 @@ const getList = () => {
   axios.get(baseURL + "/todos",config)
   .then(response => {
     const todo = response.data.todos;
-
+    data = response.data;
     // 判斷是否待辦事件
     if (todo.length){
       // 有待辦事件-移除無事件圖樣，新增有事件列表
       noEvent.classList.add('dphidden');
       haveEvent.classList.remove('dphidden');
       showList(todo);
+      undoneNum.textContent = `${undoneCount} 個待完成項目`;
     }else{
       // 無待辦事件-新增無事件圖樣，移除有事件列表
       noEvent.classList.remove('dphidden');
@@ -76,7 +60,8 @@ const getList = () => {
 // 處理資料渲染
 const showList = dataList => {
   let listStr = '';
-  let undoneCount = 0;
+  undoneCount = 0;
+  // let undoneCount = 0;
   dataList.forEach(item => {
     if(!item.completed_at){
       // 未完成
@@ -99,7 +84,7 @@ const showList = dataList => {
     }
   });
   toDoList.innerHTML = listStr;
-  undoneNum.textContent = `${undoneCount} 個待完成項目`;
+  // undoneNum.textContent = `${undoneCount} 個待完成項目`;
 }
 
 // Test API，token未過期才初始化畫面，若已過期則回到首頁
@@ -154,33 +139,38 @@ add.addEventListener("submit",e => {
     axios.post(baseURL + '/todos',newData,config)
     .then(response => {
       getList();
+      listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
+      all.classList.add('list-menu-active');
     })
     .catch(error => {
       alert("連線異常");
-    });
+    })
+    .finally(() => add.reset());
   }
 });
 
-// listMenu.addEventListener("click",e =>{
-//   // 監聽清單選項列
-//   e.preventDefault();
-//   listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
-//   e.target.classList.add('list-menu-active');
-//   if(e.target.name === "全部"){
-//     getList();
-//   }else{
-//     const filterData = data.todos.filter(item => {
-//       let itemState = '';
-//       if(!item.completed_at){
-//         itemState = '待完成';
-//       }else{
-//         itemState = '已完成';
-//       }
-//       return e.target.name === itemState;
-//     });
-//     showList(filterData);
-//   }
-// });
+listMenu.addEventListener("click",e =>{
+  // 監聽清單選項列
+  e.preventDefault();
+
+  listMenuButton.forEach(item => item.classList.remove('list-menu-active'));
+  e.target.classList.add('list-menu-active');
+  if(e.target.name === "alltodo"){
+    getList();
+  }else{
+    const filterData = data.todos.filter(item => {
+      let itemState = '';
+      if(!item.completed_at){
+        itemState = 'undonetodo';
+      }else{
+        itemState = 'donetodo';
+      }
+      return e.target.name === itemState;
+    });
+    showList(filterData);
+    undoneNum.textContent = `${undoneCount} 個待完成項目`;
+  }
+});
 // 未作內容: 點擊左側狀態改變、刪除
 // document.querySelectorAll(".state button").forEach(item => {
 //   item.addEventListener("click",e => {
