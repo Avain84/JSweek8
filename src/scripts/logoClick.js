@@ -9,10 +9,10 @@ logo.addEventListener("click",e => {
   };
   axios.get(`${baseURL}/check`,config)
   .then(response => {
-    window.location.pathname = '/inside.html';
+    window.location.pathname = '/JSweek8/inside.html';
     // getList();
   })
   .catch(error => {
-    window.location.pathname = '/index.html';
+    window.location.pathname = '/JSweek8/index.html';
   });
 })
