@@ -1,5 +1,3 @@
-let baseURL = 'https://todoo.5xcamp.us';
-
 // 變數區
 let data = {};
 let undoneCount = 0;
@@ -34,7 +32,7 @@ const getList = () => {
   user.classList.remove('dphidden');
   user.textContent = `${window.localStorage.getItem('nickname')}的待辦`;
 
-  axios.get(baseURL + "/todos",config)
+  axios.get(`${baseURL}/todos`,config)
   .then(response => {
     const todo = response.data.todos;
     data = response.data;
@@ -89,7 +87,7 @@ const showList = dataList => {
 
 // Test API，token未過期才初始化畫面，若已過期則回到首頁
 (() => {
-  axios.get(baseURL + '/check',config)
+  axios.get(`${baseURL}/check`,config)
   .then(response => {
     alert(`${window.localStorage.getItem('nickname')}您好！`);
     // 初始化畫面
@@ -102,17 +100,11 @@ const showList = dataList => {
   })
 })();
 
-// 點擊 logo 清除 localStorage
-home.addEventListener("click",e => {
-  window.localStorage.clear();
-  // 首頁應該要有判斷是否還有token
-});
-
 // 登出API
 logOut.addEventListener("click",e => {
   e.preventDefault();
   
-  axios.delete(baseURL + '/users/sign_out',config)
+  axios.delete(`${baseURL}/users/sign_out`,config)
   .then(response => {
     alert(response.data.message);
     window.location.href = window.localStorage.getItem('loginPage');
@@ -136,7 +128,7 @@ add.addEventListener("submit",e => {
     alert("請輸入待辦事項");
     return;
   }else{    
-    axios.post(baseURL + '/todos',newData,config)
+    axios.post(`${baseURL}/todos`,newData,config)
     .then(response => {
       getList();
       listMenuButton.forEach(item => item.classList.remove('list-menu-active'));

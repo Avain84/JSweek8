@@ -1,11 +1,8 @@
-const baseURL = 'https://todoo.5xcamp.us';
-
 // DOM
 const loginForm = document.querySelector('.login-form');
 const alertText = document.querySelectorAll('.alert');
 const alertEmail = document.querySelector('.alert-email');
 const alertPassword = document.querySelector('.alert-password');
-
 
 // 預設先拿掉所有輸入警示
 alertText.forEach(item => item.classList.add('vbhidden'));
@@ -37,7 +34,7 @@ loginForm.addEventListener("submit", e => {
       }
     };
     
-    axios.post(baseURL + '/users/sign_in',dataForm)
+    axios.post(`${baseURL}/users/sign_in`,dataForm)
     .then(response => {
       window.localStorage.setItem('token', response.headers.authorization);
       window.localStorage.setItem('nickname', response.data.nickname);
